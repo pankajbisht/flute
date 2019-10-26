@@ -1,0 +1,22 @@
+{
+  "name": "flute",
+  "version": "1.0.0",
+  "description": "flute is a canvas editor",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pankajbisht/flute.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pankajbisht/flute/issues"
+  },
+  "homepage": "https://github.com/pankajbisht/flute#readme",
+  "dependencies": {
+    "gulp": "^4.0.2"
+  }
+}
