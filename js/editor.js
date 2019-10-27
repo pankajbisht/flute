@@ -1,38 +1,39 @@
 var editor;
 var input = document.getElementById("select");
+
 function selectTheme() {
-        var theme = input.options[input.selectedIndex].textContent;
-        editor.setOption("theme", theme);
-        location.hash = "#" + theme;
-      }
+    var theme = input.options[input.selectedIndex].textContent;
+    editor.setOption("theme", theme);
+    location.hash = "#" + theme;
+}
 
 
 $(function () {
- 	"use strict";
+ 	  "use strict";
 
-	var gbl = null;
-	window.c = _("#canvas");
+	   var gbl = null;
+	    window.c = _("#canvas");
 
-	editor = CodeMirror.fromTextArea(document.getElementById("codeArea"), {
-		lineNumbers: true,
-		matchBrackets: true,
-		continueComments: "Enter",
-		lineWrapping: true,
-        extraKeys: {
-            "Ctrl-/": "toggleComment",
-            "Ctrl-Space": "autocomplete",
-            "F11": function(cm) {
-                cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-            },
-            "Esc": function(cm) {
-                if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
-            }
-        },
-        foldGutter: true,
-        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-        styleActiveLine: true,
-        matchBrackets: true
-	});
+	     editor = CodeMirror.fromTextArea(document.getElementById("codeArea"), {
+		       lineNumbers: true,
+		       matchBrackets: true,
+		       continueComments: "Enter",
+		       lineWrapping: true,
+           extraKeys: {
+              "Ctrl-/": "toggleComment",
+              "Ctrl-Space": "autocomplete",
+              "F11": function(cm) {
+                  cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+              },
+              "Esc": function(cm) {
+                  if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+              }
+          },
+          foldGutter: true,
+          gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+          styleActiveLine: true,
+          matchBrackets: true
+	   });
 
     var choice = (location.hash && location.hash.slice(1)) ||
                (document.location.search &&
@@ -93,17 +94,14 @@ $(function () {
         $("canvas").removeClass("w3-hide");
     }
 
+    function tooBox (e) {
+		    var self = $(this);
+		    var text = self.text();
 
-	function tooBox () {
-		var self = $(this);
-		var text = self.text();
-
-        if (text == "Reset")
-            reset();
-		else if (text == "Code")
-			code();
-		else if (text == "Preview")
-			preview();
+        if (text == "Reset") reset();
+		    else if (text == "Code") code();
+		    else if (text == "Preview") preview();
+        else if(text == "Run") focusOut(e);
 	}
 
 
@@ -129,7 +127,7 @@ $(function () {
 		editor.setSize(600, 500);
 
 		$("#log-clear").on("click", logClear);
-		$("div").on("focusout", focusOut);
+		//$("div").on("focusout", focusOut);
 		$("#tool").on("click", 'button', tooBox);
 	});
 });
