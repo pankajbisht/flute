@@ -308,11 +308,13 @@ class Canvas extends Util {
     }
 
     mode (is) {
+        var ctx = this.ctx;
 
         if (is == "global") {
-            var ctx = this;
             for (var key in ctx) {
-                window[key] = ctx[key];
+                if (ctx.hasOwnProperty(key)) {
+                    window[key] = ctx[key];
+                }
             }
         } else {
             if (is.length > 0) {
@@ -762,6 +764,23 @@ class Canvas extends Util {
     	$(".removeclrchit").on("click", function () {
     		$(this).parent().remove();
     	});
+    }
+
+    // assert
+
+    assert(value, desc) {
+      var test =  value ? "pass" : "fail";
+
+      var tmp =   `<span class="clr-chit ${test}">
+                      ${desc}
+                      <small class="removeclrchit close" style="cursor: pointer;margin: 0 16px;">✖</small>
+                  </span>`;
+
+      $(".logs").append(tmp);
+
+      $(".removeclrchit").on("click", function () {
+        $(this).parent().remove();
+      });
     }
 
 

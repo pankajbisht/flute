@@ -11,7 +11,11 @@ body {
 
 #codeArea { display:none; }
 
-.clr-chit { float: left; }
+.clr-chit { float: left;margin: 4px;padding: 4px; }
+
+.clr-chit.pass { background: green; color: white; }
+.clr-chit.fail { background: red; color: white; }
+
 
 header {
     padding: 0;
