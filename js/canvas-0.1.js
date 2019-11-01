@@ -248,7 +248,7 @@ class Util extends PVector {
     logEach (array) {
 
         for (var i = 0, length = array.length; i < length; i++)
-            log(array[i]);
+            this.logs(array[i]);
     }
 
     range (x, y, arr, action) {
@@ -294,6 +294,47 @@ class Util extends PVector {
         console.group(start);
         console.log(msg);
         console.groupEnd(start);
+    }
+
+    // logs
+
+    logs (clr) {
+
+        var tmp =   `<span class="clr-chit">
+                        ${clr}
+                        <small class="removeclrchit close" style="cursor: pointer;margin: 0 16px;">✖</small>
+                    </span>`;
+
+        $(".logs").append(tmp);
+
+    	$(".removeclrchit").on("click", function () {
+    		$(this).parent().remove();
+    	});
+    }
+
+    // assert
+
+    assert(value, desc) {
+      var test =  value ? "pass" : "fail";
+
+      var tmp =   `<span class="clr-chit ${test}">
+                      ${desc}
+                      <small class="removeclrchit close" style="cursor: pointer;margin: 0 16px;">✖</small>
+                  </span>`;
+
+      $(".logs").append(tmp);
+
+      $(".removeclrchit").on("click", function () {
+        $(this).parent().remove();
+      });
+    }
+
+    // testing
+
+    profile(name, fn) {
+        console.time(name);
+        fn();
+        console.timeEnd(name);
     }
 }
 
@@ -526,6 +567,15 @@ class Canvas extends Util {
         this.ctx.globalAlpha = val;
     }
 
+    rColor() {
+        var cformat = "";
+        var ctx = this.ctx;
+        var o = Math.round, r = Math.random, s = 255;
+        cformat = 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+        ctx.fillStyle = ""+cformat+"";
+        ctx.fill();
+    }
+
     color(r, g, b, a) {
 
         var cformat = "";
@@ -747,51 +797,6 @@ class Canvas extends Util {
         if (!el) el = document.getElementById("canvas");
 
         el.addEventListener(event, callback, false);
-    }
-
-
-    // logs
-
-    logs (clr) {
-
-        var tmp =   `<span class="clr-chit">
-                        ${clr}
-                        <small class="removeclrchit close" style="cursor: pointer;margin: 0 16px;">✖</small>
-                    </span>`;
-
-        $(".logs").append(tmp);
-
-    	$(".removeclrchit").on("click", function () {
-    		$(this).parent().remove();
-    	});
-    }
-
-    // assert
-
-    assert(value, desc) {
-      var test =  value ? "pass" : "fail";
-
-      var tmp =   `<span class="clr-chit ${test}">
-                      ${desc}
-                      <small class="removeclrchit close" style="cursor: pointer;margin: 0 16px;">✖</small>
-                  </span>`;
-
-      $(".logs").append(tmp);
-
-      $(".removeclrchit").on("click", function () {
-        $(this).parent().remove();
-      });
-    }
-
-
-
-    // testing
-
-
-    profile(name, fn) {
-        console.time(name);
-        fn();
-        console.timeEnd(name);
     }
 }
 
