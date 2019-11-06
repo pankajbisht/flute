@@ -8,11 +8,15 @@ Ex - c.rect(0, 0, 100, 100); // for create square and c indicate character or ob
 
 # How to use
 In flute you have one global variable c witch contain lot of utility method.
+
 Ex -> c.methodname();
 
 
 # Related method
 rect(x, y, width, height, radius); # radius not required
+
 ellipse(x, y, width, heihgt) # Draw circle or ellipse
+
 fill(string) # Fill color
+
 logs(msg) # Print your logs on log section
